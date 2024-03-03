@@ -22,11 +22,15 @@ public class ShipinDao {
     }
 
     public String getShipinById(int num) throws IOException {
-        String apiurl = "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=33961&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709";
+        //创建访问api
+        String front = "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=";
+
+        String end = "&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709";
+        String apiurl = front + num + end;
         URL url = new URL(apiurl);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("GET");
-
+        //获取返回信息
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
@@ -54,8 +58,9 @@ public class ShipinDao {
 //                    priceNode = j.get("price");
 //                    System.out.println("price is " + priceNode.asText());
 //                }
-                httpURLConnection.disconnect();
+
                 temNode.get(0).get("price");
+                httpURLConnection.disconnect();
                 return String.valueOf(temNode.get(0).get("price"));
 //                priceNode = temNode[0].get("peice");
 //                System.out.println("这个price是" + priceNode.asText());
