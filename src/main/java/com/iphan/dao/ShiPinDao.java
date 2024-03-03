@@ -14,16 +14,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Component
-public class ShipinDao {
+public class ShiPinDao {
     @Autowired
     public Shipin shipin;
 
-    public ShipinDao() {
-    }
-
-    public String getShipinById(int num) throws IOException {
-        String apiurl = "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=33961&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709";
-        URL url = new URL(apiurl);
+    public String getShiPinByIdFromBuff(int goodsId) throws IOException {
+        String apiUrl = String.format("\"https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=%d&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709", goodsId);
+        URL url = new URL(apiUrl);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("GET");
 

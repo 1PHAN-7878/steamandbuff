@@ -16,7 +16,7 @@ public class SearchController {
     @GetMapping("")
     public String showAll() throws IOException {
         String text;
-        text = shipinService.getShipinById(111);
+        text = shipinService.getShiPinByIdFromBuff(111);
         return text;
     }
 }

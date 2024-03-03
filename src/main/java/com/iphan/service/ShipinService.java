@@ -1,6 +1,6 @@
 package com.iphan.service;
 
-import com.iphan.dao.ShipinDao;
+import com.iphan.dao.ShiPinDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,13 +9,12 @@ import java.io.IOException;
 @Component
 public class ShipinService {
     @Autowired
-    ShipinDao shipinDao;
+    ShiPinDao shipinDao;
 
     public ShipinService() {
     }
 
-    public String getShipinById(int num) throws IOException {
-        return shipinDao.getShipinById(num);
-
+    public String getShiPinByIdFromBuff(int num) throws IOException {
+        return shipinDao.getShiPinByIdFromBuff(num);
     }
 }
