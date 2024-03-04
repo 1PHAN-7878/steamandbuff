@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>帮你查询饰品干</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+  <!-- <div class="row">
+      <div class="col-3" style="background-color: blue;">col3</div>
+      <div class="col-4" style="background-color: antiquewhite;">col4</div>
+
+
+  </div> -->
+  <form action="/searchs" method="get" id="searchform">
+    <div class="row text-center">
+      <div class="col-2">
+        <label for="name" class="form-label text-muted" style="font-size: 26px;">name:</label>
+      </div>
+      <div class="col-6">
+        <input type="text" name="name" id="name" class="form-control" placeholder="输入饰品信息">
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn btn-primary">查询</button>
+      </div>
+
+    </div>
+
+
+  </form>
+  <div class="row">
+    <div class="col-6">
+      <div class="" style="background-color:black;" id="test">这是字</div>
+    </div>
+  </div>
+
+
+</div>
+<!-- <form>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Enter email" name="email">
+          </div>
+          <div class="col">
+            <input type="password" class="form-control" placeholder="Enter password" name="pswd">
+          </div>
+        </div>
+      </form> -->
+
+
+</div>
+<script>
+  $(function(){
+    $("#test").hide();
+    $("#searchform").submit(function(event){
+      event.preventDefault();
+
+      var formData = $(this).serialize();
+      var urlpath = window.location.origin + $(this).attr('action');
+      $.ajax(
+              {
+                url: urlpath,
+                method: $(this).attr('method'),
+                data: formData,
+                success : function(){
+                  $("#test").show();
+                }
+              }
+      );
+    })
+  });
+</script>
+</body>
+
+</html>
