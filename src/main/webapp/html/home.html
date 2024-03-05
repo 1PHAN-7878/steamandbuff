@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="d-flex justify-content-left py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+    </header>
+
+    <div class="row">
+        <div class="col-3">
+            <!-- 轮播 -->
+            <div id="demo" class="carousel slide justify-content-center" data-bs-ride="carousel" style="width: 300px">
+
+                <!-- 指示符 -->
+
+
+                <!-- 轮播图片 -->
+                <div class="carousel-inner" >
+                    <div class="carousel-item active" style="width: 300px; height: 200px">
+                        <img src="../assets/img/hudiedao.jpeg" class="d-block" style="width: 300px; height: 200px; /* 设置图片的高度 */
+                    object-fit: fill; /* 缩放图片以适应容器 */" id="img1">
+                    </div>
+                    <div class="carousel-item" style="width: 300px; height: 200px">
+                        <img src="../assets/img/yinhuaji.png" class="d-block" style="width: 300px; height: 200px; /* 设置图片的高度 */
+                    object-fit: fill; /* 缩放图片以适应容器 */" id="img2">
+                    </div>
+
+                </div>
+
+                <!-- 左右切换按钮 -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="h2 d-flex flex-row align-items-end" style="height: 200px;">
+                <i class="bi bi-currency-yen"></i>
+                <span class="text-info" id="price"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        // 781598;
+        var priceHudiedao = 1;
+        var priceYinhuaji = 2;
+        $(function (){
+            var urlpath = window.location.origin + "/searchs";
+            $.ajax(
+                {
+                    url: urlpath,
+                    method: "GET",
+                    data: {
+                        name: "42530"
+                    },
+                    success: function (text){
+                        $("#price").text("¥" + text);
+                        priceHudiedao = text;
+                    }
+                }
+            )
+
+            $.ajax(
+                {
+                    url: urlpath,
+                    method: "GET",
+                    data: {
+                        name: "781598"
+                    },
+                    success: function (text){
+                        $("#price").text("¥" + text);
+                        priceYinhuaji = text;
+                    }
+                }
+            )
+        });
+        var currentIndex = 0;
+        $(document).ready(function() {
+            // 获取轮播元素
+            var carousel = $('#demo');
+
+            // 获取轮播内部的轮播图片元素
+            var carouselItems = carousel.find('.carousel-item');
+
+            // 获取上一张和下一张按钮元素
+            var prevButton = carousel.find('.carousel-control-prev');
+            var nextButton = carousel.find('.carousel-control-next');
+
+            // 上一张按钮点击事件处理函数
+            prevButton.click(function() {
+                // 移除当前显示图片的active类
+                carouselItems.eq(currentIndex).removeClass('active');
+
+                // 计算上一张图片的索引
+                var prevIndex = currentIndex - 1;
+
+                // 判断是否到达第一张图片，如果是则切换到最后一张图片
+                if (prevIndex < 0) {
+                    prevIndex = carouselItems.length - 1;
+                }
+
+                // 切换到上一张图片
+                carouselItems.eq(prevIndex).addClass('active');
+
+                // 更新当前显示图片索引
+                currentIndex = prevIndex;
+            });
+
+            // 下一张按钮点击事件处理函数
+            nextButton.click(function() {
+                // 移除当前显示图片的active类
+                carouselItems.eq(currentIndex).removeClass('active');
+
+                // 计算下一张图片的索引
+                var nextIndex = currentIndex + 1;
+
+                // 判断是否到达最后一张图片，如果是则切换到第一张图片
+                if (nextIndex >= carouselItems.length) {
+                    nextIndex = 0;
+                }
+
+                // 切换到下一张图片
+                carouselItems.eq(nextIndex).addClass('active');
+
+                // 更新当前显示图片索引
+                currentIndex = nextIndex;
+                if(currentIndex == 0){
+                    $("#price").text("¥" + priceHudiedao);
+                }else if(currentIndex == 1){
+                    $("#price").text("¥" + priceYinhuaji);
+                }
+            });
+        });
+
+    </script>
+
+
+
+    <script>
+    // $(document).ready(function() {
+        //     // 获取轮播元素
+        //     var carousel = $('#demo');
+        //
+        //     // 获取轮播内部的轮播图片元素
+        //     var carouselItems = carousel.find('.carousel-item');
+        //
+        //     // 获取轮播指示符元素
+        //     var indicators = carousel.find('.carousel-indicators button');
+        //
+        //     // 定义当前显示的轮播图片索引
+        //     var currentIndex = 0;
+        //
+        //     // 点击轮播指示符按钮切换图片
+        //     indicators.click(function() {
+        //         // 获取点击的指示符按钮的索引
+        //         var index = $(this).data('bs-slide-to');
+        //
+        //         // 移除当前显示图片的active类
+        //         carouselItems.eq(currentIndex).removeClass('active');
+        //         // 移除当前激活指示符按钮的active类
+        //         indicators.eq(currentIndex).removeClass('active');
+        //
+        //         // 切换到点击的指示符对应的图片
+        //         carouselItems.eq(index).addClass('active');
+        //
+        //         // 更新当前显示图片索引
+        //         currentIndex = index;
+        //
+        //         // 添加点击的指示符按钮的active类
+        //         $(this).addClass('active');
+        //     });
+        // });
+    </script>
+
+</div>
+</body>
+</html>
