@@ -1,20 +1,18 @@
 package com.iphan.pojo;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 @Component
-public class Shipin {
+public class Product {
     public String name;
     public double price;
 
-    public Shipin(String name, double price) {
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }
 
-    public Shipin() {
+    public Product() {
     }
 
     public String getName() {

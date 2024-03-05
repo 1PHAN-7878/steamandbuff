@@ -2,7 +2,7 @@ package com.iphan.dao;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iphan.pojo.Shipin;
+import com.iphan.pojo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,24 +10,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 @Component
-public class ShipinDao {
+public class ProductDao {
     @Autowired
-    public Shipin shipin;
+    public Product product;
 
-    public ShipinDao() {
-    }
-
-    public String getShipinById(int num) throws IOException {
+    public String getProductById(String id) throws IOException {
         //创建访问api
-        String front = "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=";
-
-        String end = "&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709";
-        String apiurl = front + num + end;
-        URL url = new URL(apiurl);
+        String apiUrl = String.format("https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=%s&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=1709440172709", id);
+        URL url = new URL(apiUrl);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("GET");
         //获取返回信息
