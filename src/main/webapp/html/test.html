@@ -3,8 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>what?</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <table class="table" id="searchresult">
+                <thead>
+                <tr>
+                    <th>饰品名称</th>
+                    <th>buff价格</th>
+                    <th>steam价格</th>
+                    <th>更新时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                    <td>1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-3">
+            <button id="ok" type="button" class="btn btn-info">点一下</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function (){
+
+        $("#ok").click(function (){
+            // $("#searchresult")
+            let newTr = $("<tr></tr>");
+
+            let newTdName = $("<td></td>");
+            newTdName.text("name1");
+            let newTdSteamPriceCny = $("<td></td>");
+            newTdSteamPriceCny.text("steamPriceCny");
+            let newTdBuffPrice = $("<td></td>");
+            newTdBuffPrice.text("buffPrice");
+            let newTdUpdateTime = $("<td></td>");
+            newTdUpdateTime.text("updateTime");
+
+            newTr.append(newTdName);
+            newTr.append(newTdSteamPriceCny);
+            newTr.append(newTdBuffPrice);
+            newTr.append(newTdUpdateTime);
+            $("#searchresult").append(newTr);
+        });
+
+    })
+</script>
 </body>
 </html>

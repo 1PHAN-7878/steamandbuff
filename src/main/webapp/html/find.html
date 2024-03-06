@@ -36,18 +36,59 @@
         <input type="text" name="name" id="name" class="form-control" placeholder="输入饰品信息">
       </div>
       <div class="col-4">
-        <button type="submit" class="btn btn-primary">查询</button>
+        <button type="submit" class="btn btn-primary" id="submit">查询</button>
       </div>
 
     </div>
 
 
   </form>
-  <div class="row">
-    <div class="col-6">
-      <div class="" style="background-color:black;" id="test">这是字</div>
+<!--  <div class="row">-->
+<!--    <div class="col-6">-->
+<!--      <div class="" style="background-color:black;" id="test">这是字</div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+    <div class="row " style="margin-top: 50px" >
+      <div class="col-9">
+        <table class="table" id="searchresult">
+          <thead>
+          <tr>
+            <th>饰品名称</th>
+            <th>buff价格</th>
+            <th>steam价格</th>
+            <th>更新时间</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>mary@example.com</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>July</td>
+            <td>Dooley</td>
+            <td>july@example.com</td>
+            <td>1</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-3">
+        <button id="clear" type="button" class="btn btn-info">清除查询结果</button>
+      </div>
     </div>
-  </div>
+
 
 
 </div>
@@ -63,10 +104,11 @@
       </form> -->
 
 
-</div>
+
 <script>
   $(function(){
-    $("#test").hide();
+    // $("#test").hide();
+    $("#searchresult").hide();
     $("#searchform").submit(function(event){
       event.preventDefault();
 
@@ -78,12 +120,53 @@
                 method: $(this).attr('method'),
                 data: formData,
                 success : function(){
-                  $("#test").show();
+                  // $("#test").show();
+                  $("#searchresult").show();
                 }
               }
       );
     })
   });
+
+  $(function (){
+
+    $("#submit").click(function (){
+      // $("#searchresult")
+      let newTr = $("<tr></tr>");
+
+      let newTdName = $("<td></td>");
+      newTdName.text("name1");
+      let newTdSteamPriceCny = $("<td></td>");
+      newTdSteamPriceCny.text("steamPriceCny");
+      let newTdBuffPrice = $("<td></td>");
+      newTdBuffPrice.text("buffPrice");
+      let newTdUpdateTime = $("<td></td>");
+      newTdUpdateTime.text("updateTime");
+
+      newTr.append(newTdName);
+      newTr.append(newTdSteamPriceCny);
+      newTr.append(newTdBuffPrice);
+      newTr.append(newTdUpdateTime);
+      $("#searchresult tbody").append(newTr);
+      //对应关系是不同的
+      //opacity是fadeTo
+      //display是display
+      newTr.css("opacity", "0");
+      //newTr.fadeIn(1000);
+      newTr.fadeTo(1000, 1);
+    });
+    $("#clear").click(function (){
+      //fadeinout更改属性，用fadeTo只改变透明度
+      // $("#searchresult tbody").empty().fadeOut(1000, function (){
+      //   $(this).css("display", "block");
+      // });
+      $("#searchresult tbody").fadeTo(1000, 0, function (){
+        $(this).empty();
+        //默认的opacity设置为0了，后续添加新的表格不显示了
+        $(this).css("opacity", "1");
+      })
+    });
+  })
 </script>
 </body>
 

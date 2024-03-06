@@ -47,7 +47,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-offset-3">
             <div class="h2 d-flex flex-row align-items-end" style="height: 200px;">
                 <i class="bi bi-currency-yen"></i>
                 <span class="text-info" id="price"></span>
@@ -64,7 +64,7 @@
         var priceHudiedao = 1;
         var priceYinhuaji = 2;
         $(function (){
-            var urlpath = window.location.origin + "/searchs";
+            var urlpath = window.location.origin + "/api/v1/query";
             $.ajax(
                 {
                     url: urlpath,
@@ -92,6 +92,7 @@
                     }
                 }
             )
+            $("#price").text("¥" + priceHudiedao);
         });
         var currentIndex = 0;
         $(document).ready(function() {
